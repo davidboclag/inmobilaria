@@ -1,11 +1,15 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, LOCALE_ID } from '@angular/core';
 import { DataViewModule } from 'primeng/dataview';
+import { GalleriaModule } from 'primeng/galleria';
+import { ButtonModule } from 'primeng/button';
 import { PaginationProperty } from 'src/app/models/PaginationProperty';
 import { InmobiliariaService } from 'src/app/providers/inmobiliaria.service';
 import { TagModule } from 'primeng/tag';
+import localeEs from '@angular/common/locales/es';
 import { Property } from 'src/app/models/Property';
+registerLocaleData(localeEs);
 
 @Component({
   selector: 'app-home',
@@ -16,14 +20,22 @@ import { Property } from 'src/app/models/Property';
     CommonModule,
     HttpClientModule,
     DataViewModule,
-    TagModule
-  ]
+    TagModule,
+    GalleriaModule,
+    ButtonModule
+  ],
+  providers: [
+    {
+      provide: LOCALE_ID,
+      useValue: 'es-ES',
+    },
+  ],
 })
 export class HomeComponent {
 
+  properties: Property[] = [];
   layout: 'list' | 'grid' = 'list';
-  properties!: PaginationProperty;
-
+  data!: PaginationProperty;
 
   constructor(private inmobiliariaService: InmobiliariaService) { }
 
@@ -31,11 +43,10 @@ export class HomeComponent {
     this.getProperties();
   }
 
-  getProperties() {
-    this.inmobiliariaService.getProperties().subscribe(data => {
-      this.properties = data;
-      // this.properties.data = this.properties.data.concat(data.data);
-      // console.log(this.properties.data);
+  getProperties(page: number = 1) {
+    this.inmobiliariaService.getProperties(page).subscribe(data => {
+      this.data = data;
+      this.properties.length == 0 ? this.properties = data.data : this.properties = this.properties.concat(data.data);
     })
   }
 

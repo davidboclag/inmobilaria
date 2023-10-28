@@ -13,7 +13,7 @@ export class InmobiliariaService {
 
   constructor(private http: HttpClient) { }
 
-  getProperties(): Observable<PaginationProperty> {
-    return this.http.get<PaginationProperty>(`${this.api}/new-search?tipo=10`);
+  getProperties(page: number = 1): Observable<PaginationProperty> {
+    return this.http.get<PaginationProperty>(`${this.api}/new-search?tipo=10?&page=${page}`);
   }
 }
