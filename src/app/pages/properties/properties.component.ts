@@ -47,7 +47,7 @@ export class PropertiesComponent {
   }
 
   getDatailProperty(property: Property) {
-    this.router.navigate(['/detail-property', property.provinciaUrl, property.ciudadUrl, property.id]);
+    this.router.navigate(['/comprar-vivienda', property.provinciaUrl, property.ciudadUrl, property.id]);
   }
 
   getSeverity(m2: number) {

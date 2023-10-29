@@ -7,11 +7,7 @@ export const routes: Routes = [] = [
   },
   {
     path: 'comprar-vivienda',
-    loadComponent: () => import('./pages/properties/properties.component').then(m => m.PropertiesComponent),
-  },
-  {
-    path: 'detail-property/:provinciaUrl/:ciudadUrl/:id',
-    loadComponent: () => import('./pages/detail-property/detail-property.component').then(m => m.DetailPropertyComponent)
+    loadChildren: () => import('./pages/properties/routes'),
   },
   { path: '**', redirectTo: '' }
 ]
