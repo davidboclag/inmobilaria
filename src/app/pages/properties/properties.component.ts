@@ -49,14 +49,4 @@ export class PropertiesComponent {
   getDatailProperty(property: Property) {
     this.router.navigate(['/comprar-vivienda', property.provinciaUrl, property.ciudadUrl, property.id]);
   }
-
-  getSeverity(m2: number) {
-    if (m2 < 100) {
-      return 'danger';
-    } else if (m2 < 200) {
-      return 'warning';
-    } else {
-      return 'success'
-    }
-  };
 }
