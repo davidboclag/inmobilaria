@@ -48,8 +48,7 @@
         <ng-template let-property pTemplate="gridItem">
             <div class="col-12 sm:col-6 lg:col-12 xl:col-4 p-2">
                 <div class="p-4 border-1 surface-border surface-card border-round h-full">
-                    <div (click)="getDatailProperty(property)" style="cursor: pointer;"
-                        class="flex flex-wrap align-items-center justify-content-between gap-2">
+                    <div (click)="getDatailProperty(property)" style="cursor: pointer;" class="text-center">
                         <span class="font-bold text-truncate-two-lines">{{ property.Metadescription}}</span>
                     </div>
                     <div class="flex flex-column align-items-center gap-3 py-5">
@@ -61,7 +60,7 @@
                                     style="width: 100%; display: block;" />
                             </ng-template>
                         </p-galleria>
-                        <div (click)="getDatailProperty(property)" style="cursor: pointer;">
+                        <div class="text-center" (click)="getDatailProperty(property)" style="cursor: pointer;">
                             <div>
                                 <span>{{ (property.Bedrooms) ? property.Bedrooms + ' hab.' : ''}} {{
                                     (property.Bathrooms) ? property.Bathrooms + ' bañ.' : ''}} {{
@@ -75,12 +74,10 @@
                                 <span *ngIf="property.DescuentoPrecio" class="font-bold text-danger"><i
                                         class="pi pi-arrow-down"></i>{{property.DescuentoPrecio}}%</span>
                             </div>
-                            <div class="flex align-items-center gap-3">
-                                <span class="flex align-items-center gap-2">
-                                    <i class="pi pi-map-marker"></i>
-                                    <span class="font-semibold">{{ property.StreetName + ' - (' + property.Ciudad +
-                                        ')'}}</span>
-                                </span>
+                            <div>
+                                <i class="pi pi-map-marker mr-1"></i>
+                                <span class="font-semibold">{{ property.StreetName + ' - (' + property.Ciudad +
+                                    ')'}}</span>
                             </div>
                         </div>
                     </div>
