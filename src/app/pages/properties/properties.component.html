@@ -1,0 +1,94 @@
+<div class="card">
+    <p-dataView #dv *ngIf="properties" [value]="properties" [layout]="layout">
+        <ng-template pTemplate="header">
+            <div class="flex justify-content-end">
+                <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+            </div>
+        </ng-template>
+        <ng-template let-property pTemplate="listItem">
+            <div class="col-12">
+                <div class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
+                    <p-galleria class="mx-auto" [value]="property.imagenes" [numVisible]="5" [circular]="true"
+                        [showItemNavigators]="true" [showThumbnails]="false"
+                        [containerStyle]="{ 'max-width': '300px' }">
+                        <ng-template pTemplate="item" let-imagen>
+                            <img [src]="imagen.Uri" [alt]="property.Metadescription"
+                                style="width: 100%; display: block;" />
+                        </ng-template>
+                    </p-galleria>
+                    <div (click)="getDatailProperty(property)" style="cursor: pointer;"
+                        class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
+                        <div class="flex flex-column align-items-center sm:align-items-start gap-3">
+                            <div class="font-bold text-truncate-two-lines">{{ property.Metadescription }}</div>
+                            <div>
+                                <span class="text-2xl font-bold">{{ property.Precio | currency: 'EUR' }}</span>
+                                <span *ngIf="property.DescuentoPrecio"
+                                    class="mx-3 font-bold text-danger text-decoration-line-through">{{
+                                    property.PrecioAnterior | currency: 'EUR' }}</span>
+                                <span *ngIf="property.DescuentoPrecio" class="font-bold text-danger"><i
+                                        class="pi pi-arrow-down"></i>{{property.DescuentoPrecio}}%</span>
+                            </div>
+                            <div>
+                                <span>{{ (property.Bedrooms) ? property.Bedrooms + ' hab.' : ''}} {{
+                                    (property.Bathrooms) ? property.Bathrooms + ' bañ.' : ''}} {{
+                                    property.SuperficieTotal}} m2 </span>
+                            </div>
+                            <div class="flex align-items-center gap-3">
+                                <span class="flex align-items-center gap-2">
+                                    <i class="pi pi-map-marker"></i>
+                                    <span class="font-semibold">{{ property.StreetName + ' - (' + property.Ciudad +
+                                        ')'}}</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template let-property pTemplate="gridItem">
+            <div class="col-12 sm:col-6 lg:col-12 xl:col-4 p-2">
+                <div class="p-4 border-1 surface-border surface-card border-round h-full">
+                    <div (click)="getDatailProperty(property)" style="cursor: pointer;" class="text-center">
+                        <span class="font-bold text-truncate-two-lines">{{ property.Metadescription}}</span>
+                    </div>
+                    <div class="flex flex-column align-items-center gap-3 py-5">
+                        <p-galleria class="mx-auto" [value]="property.imagenes" [numVisible]="5" [circular]="true"
+                            [showItemNavigators]="true" [showThumbnails]="false"
+                            [containerStyle]="{ 'max-width': '300px' }">
+                            <ng-template pTemplate="item" let-imagen>
+                                <img [src]="imagen.Uri" [alt]="property.Metadescription"
+                                    style="width: 100%; display: block;" />
+                            </ng-template>
+                        </p-galleria>
+                        <div class="text-center" (click)="getDatailProperty(property)" style="cursor: pointer;">
+                            <div>
+                                <span>{{ (property.Bedrooms) ? property.Bedrooms + ' hab.' : ''}} {{
+                                    (property.Bathrooms) ? property.Bathrooms + ' bañ.' : ''}} {{
+                                    property.SuperficieTotal}} m2 </span>
+                            </div>
+                            <div>
+                                <span class="text-2xl font-bold">{{ property.Precio | currency: 'EUR' }}</span>
+                                <span *ngIf="property.DescuentoPrecio"
+                                    class="mx-3 font-bold text-danger text-decoration-line-through">{{
+                                    property.PrecioAnterior | currency: 'EUR' }}</span>
+                                <span *ngIf="property.DescuentoPrecio" class="font-bold text-danger"><i
+                                        class="pi pi-arrow-down"></i>{{property.DescuentoPrecio}}%</span>
+                            </div>
+                            <div>
+                                <i class="pi pi-map-marker mr-1"></i>
+                                <span class="font-semibold">{{ property.StreetName + ' - (' + property.Ciudad +
+                                    ')'}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </p-dataView>
+</div>
+
+<div class="mt-5 d-grid gap-2 d-md-flex justify-content-md-center">
+    <button *ngIf="data" [disabled]="data.current_page == data.last_page" class="btn btn-primary me-md-2" type="button"
+        (click)="getProperties(data.current_page +1)">{{ data.current_page != data.last_page ? 'Ver más' : 'No quedan
+        más elementos'}}</button>
+</div>

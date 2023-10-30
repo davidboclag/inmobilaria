@@ -1,0 +1,54 @@
+<div class="mb-5">
+  <button [routerLink]="['/comprar-vivienda']" routerLinkActive="router-link-active" type="button"
+    class="btn btn-primary"><i class="bi bi-caret-left"></i> Volver</button>
+</div>
+
+<div *ngIf="property">
+  <p-carousel [value]="property.imagenes" [numVisible]="3" [numScroll]="3">
+    <ng-template let-imagen pTemplate="item">
+      <div class="product-item">
+        <div class="product-item-content">
+          <div class="mb-3">
+            <img [src]="imagen.Uri" [alt]="property.Metadescription" style="width: 100%; display: block;" />
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </p-carousel>
+
+
+  <div class="row">
+    <div class="col-md-8 col-xs-12">
+      <h2 class="mb-3 font-bold">{{ property.Metadescription }}</h2>
+      <div>
+        <p>{{ (property.vivienda.Bedrooms) ? property.vivienda.Bedrooms + ' hab.' : ''}} {{
+          (property.vivienda.Bathrooms) ? property.vivienda.Bathrooms + ' bañ.' : ''}} {{
+          property.SuperficieTotal}} m2 </p>
+      </div>
+      <div class="mb-3">
+        <i class="pi pi-map-marker"></i>
+        <span class="font-semibold">{{ property.address.StreetName + ' - (' + property.Ciudad + ')'}}</span>
+      </div>
+
+      <h4>Descripción:</h4>
+      <p>{{ property.Description }}</p>
+    </div>
+
+    <div class="col-md-4 col-xs-12">
+      <div class="text-right">
+        <div>
+          <span class="text-2xl font-bold">{{ property.operacion.Precio | currency: 'EUR' }}</span>
+          <span *ngIf="property.operacion.DescuentoPrecio"
+            class="mx-3 font-bold text-danger text-decoration-line-through">{{property.operacion.PrecioAnterior |
+            currency:
+            'EUR' }}</span>
+          <span *ngIf="property.operacion.DescuentoPrecio" class="font-bold text-danger"><i
+              class="pi pi-arrow-down"></i>{{property.operacion.DescuentoPrecio}}%</span>
+        </div>
+        <div>
+          <small>Gastos e impuestos no incluidos</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
