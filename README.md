@@ -13,5 +13,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## Otros proyectos realizado por mi (web de héroes y web de películas y series)
 
 https://github.com/davidboclag/heroes
+
 https://github.com/davidboclag/dbltv Para verla -> https://dbltv-11a31.web.app/
+
 https://github.com/davidboclag/game
